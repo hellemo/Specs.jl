@@ -16,7 +16,7 @@ end
 p1 = (name="Per", email="my@email", height=83)  # Valid Named Tuple
 p2 =(name="Petter",email="invalid", height=122) # Invalid Named Tuple
 p3 = User("Oda", "oda@oda.com", 110)            # Valid User
-p4 = User("Oda". "o@", 473)
+p4 = User("Oda", "o@", 473)
 users = [p1, p2, p3, p4]
 
 # Define a user Spec:
@@ -28,12 +28,10 @@ user_spec = Specs.MultiSpecAnd(
 )
 
 for p in users
-    @info "User $(p.name): " is_valid(user_spec, p)
+    @info "User $(p.name): $(is_valid(user_spec, p))"
     @info conform(user_spec, p)
-    @info explain(user_spec, p)
+    @info "Explain:"
+    explain(user_spec, p)
     println()
 end
-
-
-
 ```

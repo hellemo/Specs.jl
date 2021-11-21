@@ -4,28 +4,24 @@ abstract type MultiSpec <: Spec end
 
 # TO DO: Parametric types?
 struct UnkeyedAnd <: MultiSpec
-    specs
+    specs::Vector{S} where {S<:Spec}
 end
 
 struct MultiSpecAnd <: MultiSpec
-	# specs::Array{Pair{Symbol,S}} where {S<:Spec}
-    specs::Array{Pair{Symbol,Any}}
+    specs::Vector{Pair{Symbol, S}} where {S<:Spec}
 end
 
 struct MultiSpecOr <: MultiSpec
-	# specs::Array{Pair{Symbol,S}} where {S<:Spec}
-    specs::Array{Pair{Symbol,Any}}
+    specs::Vector{Pair{Symbol, S}} where {S<:Spec}
 end
 
 struct MultiSpecAtLeast <: MultiSpec
-	# specs::Array{Pair{Symbol,S}} where {S<:Spec}
-    specs::Array{Pair{Symbol,Any}}
+    specs::Vector{Pair{Symbol, S}} where {S<:Spec}
 	min::Int
 end
 
 struct MultiSpecAtMost <: MultiSpec
-	# specs::Array{Pair{Symbol,S}} where {S<:Spec}
-    specs::Array{Pair{Symbol,Any}}
+    specs::Vector{Pair{Symbol, S}} where {S<:Spec}
 	max::Int
 end
 
