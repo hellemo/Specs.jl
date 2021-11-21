@@ -1,4 +1,7 @@
 name = "Specs"
 uuid = "25f9466d-6cb1-4b6a-9761-7c1edffb7158"
-authors = ["hellemo "]
+authors = ["Lars Hellemo <hellemo@gmail.com>"]
 version = "0.1.0"
+
+[compat]
+julia = "^1.6"
