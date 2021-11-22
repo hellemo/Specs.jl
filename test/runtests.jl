@@ -31,17 +31,17 @@ user_spec = Specs.MultiSpec{Keyed, And}(
 @testset "Specs.jl" begin
 
 @testset "Is valid" begin
-    @test is_valid(user_spec, p1)
-    @test !is_valid(user_spec, p2)
-    @test is_valid(user_spec, p3)
-    @test !is_valid(user_spec, p4)
+    for u in (1, 3, 5)
+        @test is_valid(user_spec, users[u])
+        @test !is_valid(user_spec, users[u+1])
+    end
 end
 
 @testset "Conform" begin
-    @test conform(user_spec, p1) == p1
-    @test conform(user_spec, p2) === nothing
-    @test conform(user_spec, p3) == p3
-    @test conform(user_spec, p4) === nothing
+    for u in (1, 3, 5)
+        @test conform(user_spec, users[u]) == users[u]
+        @test conform(user_spec, users[u+1]) === nothing
+    end
 end
 
 end
