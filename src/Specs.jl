@@ -11,5 +11,8 @@ include("spec_lib.jl")
 export is_valid, conform, explain
 export Spec
 export Contains
+export Keyed, UnKeyed
+export MultiSpec
+export And, Or, Min, Max, Between
 
 end # module

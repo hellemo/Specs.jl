@@ -13,12 +13,12 @@ struct MaxLength{T} <: AtomicSpec
 end
 is_valid(ml::MaxLength, data) = length(data) <= ml.max
 
-struct Min{T} <: AtomicSpec
+struct NMin{T} <: AtomicSpec
     min::T
 end
-is_valid(ml::Min, data) =  data >= ml.min
+is_valid(ml::NMin, data) =  data >= ml.min
 
-struct Max{T} <: AtomicSpec
+struct NMax{T} <: AtomicSpec
     max::T
 end
-is_valid(ml::Max, data) = data <= ml.max
+is_valid(ml::NMax, data) = data <= ml.max

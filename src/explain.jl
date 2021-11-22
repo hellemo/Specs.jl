@@ -1,14 +1,25 @@
-function explain(ms::MultiSpec, data)
-	for f in ms.specs
-		if hasproperty(data, f.first)
-			explain(f.second, getproperty(data, f.first))
+function explain(ms::MultiSpec{K, C}, data) where {K<:Keyed, C}
+	for s in ms.specs
+		if hasproperty(data, s.first)
+			explain(s.second, getproperty(data, s.first))
 		else
-			@info "$data failed at $(f.first) Spec: $(string(s))"
+			@info "$data failed at $(s.first) Spec: $(string(s))"
 		end
 	end
 end
 
-function explain(uk::UnkeyedAnd, data)
+function explain(ms::MultiSpec{K, C}, data::AbstractDict) where {K<:Keyed, C}
+	for s in ms.specs
+		if haskey(data, s.first)
+			explain(s.second, data[s.first])
+		else
+			@info "$data failed at $(s.first) Spec: $(string(s))"
+		end
+	end
+end
+
+
+function explain(uk::MultiSpec{K, C}, data) where {K<:UnKeyed, C}
     for s in uk.specs
         explain(s, data)
     end

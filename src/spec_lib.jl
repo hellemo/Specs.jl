@@ -1,6 +1,6 @@
 module SpecLib
 using ..Specs
-const email = Specs.UnkeyedAnd(
+const email = Specs.MultiSpec{Specs.UnKeyed,Specs.And}(
     [
         Specs.Contains("@"),
         Specs.MinLength(3),
