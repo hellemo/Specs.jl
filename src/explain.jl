@@ -13,7 +13,7 @@ function explain(ms::MultiSpec{K, C}, data::AbstractDict) where {K<:Keyed, C}
 		if haskey(data, s.first)
 			explain(s.second, data[s.first])
 		else
-			@info "$data failed at $(s.first) Spec: $(string(s))"
+			@info "$data failed at: \n missing key: :$(s.first)\n Spec: $(string(s))"
 		end
 	end
 end
