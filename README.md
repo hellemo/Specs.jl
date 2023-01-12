@@ -11,6 +11,7 @@ struct User
     email::String
     height::Int
 end
+Base.getindex(u::User, idx) = getproperty(u, idx)
 
 # Testdata
 p1 = (name="Per", email="my@email", height=83)              # Valid Named Tuple
@@ -21,6 +22,8 @@ p5 = Dict(:name =>"Per",:email=>"my@email",
     :height =>83, :weight => 91)                            # Valid Dict (extra field)
 p6 = Dict(:name =>"Per",:email=>"my@email", :height =>283)  # Invalid Dict
 
+users = [p1, p2, p3, p4, p5, p6]
+
 # Define a user Spec:
 user_spec = Specs.MultiSpec{Keyed, And}(
     [
@@ -30,10 +33,10 @@ user_spec = Specs.MultiSpec{Keyed, And}(
 )
 
 for p in users
-    @info "User $(p.name): $(is_valid(user_spec, p))"
+    @info "User $(p[:name]): $(is_valid(user_spec, p))"
     @info conform(user_spec, p)
     @info "Explain:"
-    explain(user_spec, p)
+    @info explain(user_spec, p)
     println()
 end
 ```
